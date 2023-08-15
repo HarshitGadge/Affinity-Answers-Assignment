@@ -1,0 +1,20 @@
+Q1.SELECT ncbi_id FROM Rfam.taxonomy where species = 'Panthera tigris sumatrae (Sumatran tiger)';
+
+Q2.The coloumns which can be used to connect to all the tables is ncbi_id from tables taxonomy and rframeseq,rfamsec_acc to join rfamseq and family.
+
+Q3.SELECT t.species AS rice_type, MAX(r.length) AS longest_sequence_length
+FROM Rfam.rfamseq r
+JOIN Rfam.taxonomy t ON r.ncbi_id = t.ncbi_id
+WHERE t.species LIKE 'Oryza%'
+GROUP BY t.species
+ORDER BY longest_sequence_length DESC
+LIMIT 1;
+->Oryza sativa Indica Group,47244934
+
+Q4.SELECT f.rfam_acc AS family_accession_id,
+       f.description AS family_name,
+       MAX(f.maxl) AS max_sequence_length
+FROM Rfam.family f
+WHERE f.maxl > 1000000
+ORDER BY max_sequence_length DESC
+LIMIT 15 OFFSET 120;
