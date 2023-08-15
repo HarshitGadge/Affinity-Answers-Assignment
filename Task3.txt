@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Download the NAV data from the URL
+wget amfiindia.com/spages/NAVAll.txt
+
+
+echo -e "Scheme Name\tAsset Value" > NAV.tsv
+
+# Read the NAV data line by line
+while read -r line; do
+
+
+  fields=$(echo $line | tr "," "\t")
+
+  # Extract the Scheme Name and Asset Value fields
+  scheme_name=${fields[3]}
+  asset_value=${fields[4]}
+
+
+  echo "$scheme_name\t$asset_value" >> NAV.tsv
+
+#As for your question about storing the data in JSON,
+JSON is a popular format for structured data, and it could certainly be used to store this data.
+JSON provides a way to organize data hierarchically and supports more complex structures than TSV. 
+However, for a simple case like extracting Scheme Name and Asset Value, TSV might be sufficient and more lightweight.
